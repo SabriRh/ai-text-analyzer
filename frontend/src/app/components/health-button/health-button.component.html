@@ -1,0 +1,7 @@
+<button mat-mini-fab (click)="checkHealth()" class="health-btn">
+    @if (!isChecking()) {
+    <mat-icon>health_and_safety</mat-icon>
+    } @else {
+    <mat-icon class="spin">sync</mat-icon>
+    }
+</button>

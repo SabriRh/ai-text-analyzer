@@ -1,1 +1,13 @@
-<p>loader works!</p>
+<div class="overlay" [class.transparent]="transparent()">
+    <div class="loader">
+        <svg width="60" height="60" viewBox="0 0 80 60">
+            <path fill="none" stroke="var(--primary)" stroke-width="4" stroke-linecap="round"
+                d="M0,30 C10,10 20,50 40,30 C60,10 70,50 80,30">
+                <animate attributeName="d" dur="1.5s" repeatCount="indefinite" values="M0,30 C10,10 20,50 40,30 C60,10 70,50 80,30;
+                  M0,30 C10,50 20,10 40,30 C60,50 70,10 80,30;
+                  M0,30 C10,10 20,50 40,30 C60,10 70,50 80,30" />
+            </path>
+        </svg>
+        <p>Analyse en cours...</p>
+    </div>
+</div>

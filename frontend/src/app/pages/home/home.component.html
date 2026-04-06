@@ -1,0 +1,27 @@
+<app-header />
+
+<main>
+    <div class="container">
+        <div class="two-columns">
+            <app-text-input-card (analyze)="analyzeText($event)" (clear)="clearResults()" />
+            <app-result-card [result]="result()" />
+        </div>
+
+        @if (error()) {
+        <div class="error-message">
+            {{ error() }}
+        </div>
+        }
+    </div>
+</main>
+
+<footer>
+    <p>AI Text Analyzer • Propulsé par Ollama • Données locales • By <a href="https://www.linkedin.com/in/sabrirh/"
+            target="_blank">sabrirh</a></p>
+</footer>
+
+<app-health-button />
+
+@if (isLoading()) {
+<app-loader [transparent]="true" />
+}

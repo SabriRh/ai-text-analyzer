@@ -1,0 +1,11 @@
+<header>
+    <div class="header-content">
+        <div>
+            <h1><mat-icon>auto_awesome</mat-icon> AI Text Analyzer</h1>
+            <p>Analyse, corrige, reformule et résume vos textes grâce à l'IA</p>
+        </div>
+        <button mat-icon-button (click)="toggleDarkMode()">
+            <mat-icon>{{ isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
+    </div>
+</header>

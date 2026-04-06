@@ -1,0 +1,88 @@
+.result-section {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.text-content {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text-secondary);
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+.score-bar {
+  background: var(--border);
+  border-radius: 8px;
+  height: 8px;
+  overflow: hidden;
+  flex: 1;
+  margin-right: 0.75rem;
+}
+
+.score-fill {
+  background: var(--primary);
+  height: 100%;
+  border-radius: 8px;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sentiment span {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.sentiment .positif {
+  background: #22c55e20;
+  color: #22c55e;
+}
+
+.sentiment .negatif {
+  background: #ef444420;
+  color: #ef4444;
+}
+
+.sentiment .neutre {
+  background: #6b728020;
+  color: #6b7280;
+}
+
+.empty {
+  color: var(--text-secondary);
+  font-style: italic;
+}

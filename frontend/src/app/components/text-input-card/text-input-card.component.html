@@ -1,0 +1,16 @@
+<div class="card">
+    <h2><mat-icon>edit_note</mat-icon> Texte à analyser</h2>
+    <p>Collez votre texte ci-dessous</p>
+
+    <textarea [ngModel]="text()" (ngModelChange)="text.set($event)" placeholder="Saisissez ou collez votre texte ici..."
+        rows="10"></textarea>
+
+    <div class="buttons">
+        <button mat-flat-button color="primary" [disabled]="!text()" (click)="onAnalyze()">
+            Analyser
+        </button>
+        <button mat-stroked-button (click)="onClear()">
+            Effacer
+        </button>
+    </div>
+</div>

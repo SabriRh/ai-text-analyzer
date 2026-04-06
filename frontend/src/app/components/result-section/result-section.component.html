@@ -1,0 +1,57 @@
+<div class="result-section">
+    <div class="section-header">
+        <h3>{{ title() }}</h3>
+        @if (content() && type() !== 'score') {
+        <button mat-icon-button (click)="copyText(content()?.toString() ?? '')">
+            <mat-icon>content_copy</mat-icon>
+        </button>
+        }
+    </div>
+
+    <div class="section-content">
+        @switch (type()) {
+        @case ('list') {
+        @if (content() && content().length) {
+        <ul>
+            @for (item of content(); track $index) {
+            <li>{{ item }}</li>
+            }
+        </ul>
+        } @else {
+        <div class="empty">Aucune donnée</div>
+        }
+        }
+
+        @case ('score') {
+        @if (content() !== undefined) {
+        <div class="score">
+            <div class="score-bar">
+                <div class="score-fill" [style.width.%]="content() * 100"></div>
+            </div>
+            <span>{{ content() * 100 }}%</span>
+        </div>
+        } @else {
+        <div class="empty">Aucun score</div>
+        }
+        }
+
+        @case ('sentiment') {
+        @if (content()) {
+        <div class="sentiment">
+            <span [class]="content()">{{ content() }}</span>
+        </div>
+        } @else {
+        <div class="empty">Non déterminé</div>
+        }
+        }
+
+        @default {
+        @if (content()) {
+        <div class="text-content">{{ content() }}</div>
+        } @else {
+        <div class="empty">Aucune donnée</div>
+        }
+        }
+        }
+    </div>
+</div>

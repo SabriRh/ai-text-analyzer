@@ -39,17 +39,14 @@ Response : {
 Now analyze THIS text (do not copy the examples) :
 Text : "${text}"
 Response json only, no markdown, no explanations.`;
-    console.log(`Generated prompt: ${prompt}`);
     return prompt;
 };
 
 export const languageDetection = (text: string): Language => {
     if (text.length < 20) {
-        console.log('Texte trop court pour franc, utilisation du LLM')
         return 'unknown language to detect';
     }
     const detectedLanguage = franc(text);
-    console.log(`Detected language code: ${detectedLanguage}`);
     return languageMap[detectedLanguage] || 'English';
 };
 
@@ -76,8 +73,6 @@ export async function checkOllamaHealth(): Promise<OllamaHealth> {
         } catch (e) {
             throw new Error('Failed to fetch models from Ollama: ' + (e as Error).message)
         }
-
-        console.log('Ollama health check successful:', { latencyMs, models })
 
         return {
             available: true,
