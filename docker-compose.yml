@@ -1,0 +1,38 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ai-text-analyzer-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+      - ./ollama/entrypoint.sh:/entrypoint.sh
+    entrypoint: ["/entrypoint.sh"]
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: ai-text-analyzer-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - OLLAMA_URL=http://ollama:11434/v1
+      - OLLAMA_API_KEY=ollama
+      - OLLAMA_KEEP_ALIVE=3h
+      - DEFAULT_MODEL=llama3.2:1b
+      - PORT=3000
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: ai-text-analyzer-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
