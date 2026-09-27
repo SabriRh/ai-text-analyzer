@@ -7,6 +7,7 @@ const EnvSchema = z.object({
   LOG_LEVEL: z.enum(['debug', 'info', 'warn', 'error']).default('info'),
 
   OLLAMA_URL: z.string().url(),
+  OLLAMA_BASE_URL: z.string().url(),
   OLLAMA_API_KEY: z.string().min(1),
   OLLAMA_KEEP_ALIVE: z.string().default('3h'),
   DEFAULT_MODEL: z.string().min(1),

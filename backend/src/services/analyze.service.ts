@@ -1,5 +1,4 @@
 import { ollamaClient, DEFAULT_MODEL } from './ollama.service.js';
-import { buildAnalyzePrompt } from '../prompts/analyze.prompt.js';
 import { languageDetection } from '../utils/language.js';
 import {
     AnalyzeResultSchema,
@@ -7,6 +6,7 @@ import {
 } from '../models/analyze.schema.js';
 import { UpstreamError } from '../errors/AppError.js';
 import { logger } from '../utils/logger.js';
+import { buildASystemPrompt, buildUserPrompt } from '../prompts/analyze.prompt.js';
 
 export async function analyzeText(text: string): Promise<AnalyzeResult & { language: string }> {
     const language = languageDetection(text);
@@ -18,12 +18,11 @@ export async function analyzeText(text: string): Promise<AnalyzeResult & { langu
         messages: [
             {
                 role: 'system',
-                content:
-                    "Tu es un assistant spécialisé dans l'analyse de texte. Tu réponds UNIQUEMENT en JSON valide, sans markdown, sans texte explicatif.",
+                content: buildASystemPrompt(),
             },
             {
                 role: 'user',
-                content: buildAnalyzePrompt(text, language),
+                content: buildUserPrompt(text, language),
             },
         ],
         temperature: 0.2,

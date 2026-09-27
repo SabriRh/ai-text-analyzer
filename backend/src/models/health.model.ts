@@ -2,6 +2,8 @@ export interface OllamaHealth {
     available: boolean;
     latencyMs?: number;
     models?: string[];
+    defaultModel?: string;
+    defaultModelAvailable?: boolean;
     error?: string;
 }
 

@@ -12,26 +12,51 @@ export const ollamaClient = new OpenAI({
   timeout: 60_000,
 });
 
+async function fetchWithTimeout(url: string, timeoutMs = 3000): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function checkOllamaHealth(): Promise<OllamaHealth> {
   const startTime = Date.now();
 
   try {
-    const response = await ollamaClient.chat.completions.create({
-      model: DEFAULT_MODEL,
-      messages: [{ role: 'user', content: 'Say "OK" in one word' }],
-      max_tokens: 5,
-      temperature: 0,
-    });
+    // 1. Ping rapide sur l'API native Ollama pour vérifier la disponibilité
+    const versionUrl = new URL('/api/version', env.OLLAMA_BASE_URL);
+    const versionRes = await fetchWithTimeout(versionUrl.toString());
+    if (!versionRes.ok) {
+      throw new Error(`Ollama /api/version returned ${versionRes.status}`);
+    }
 
     const latencyMs = Date.now() - startTime;
 
-    // Récupérer la liste des modèles via l'API native Ollama
-    const tagsUrl = new URL('/api/tags', env.OLLAMA_URL.replace(/\/v1\/?$/, ''));
-    const modelsResponse = await fetch(tagsUrl.toString());
-    const modelsData = (await modelsResponse.json()) as { models?: Array<{ name: string }> };
-    const models = modelsData.models?.map((m) => m.name) ?? [];
+    // 2. Liste des modèles installés
+    const tagsUrl = new URL('/api/tags', env.OLLAMA_BASE_URL);
+    const tagsRes = await fetchWithTimeout(tagsUrl.toString());
+    if (!tagsRes.ok) {
+      throw new Error(`Ollama /api/tags returned ${tagsRes.status}`);
+    }
 
-    return { available: true, latencyMs, models };
+    const tagsData = (await tagsRes.json()) as {
+      models?: Array<{ name: string }>;
+    };
+    const models = tagsData.models?.map((m) => m.name) ?? [];
+
+    // 3. Vérifie que le modèle par défaut est bien présent
+    const defaultModelAvailable = models.includes(DEFAULT_MODEL);
+
+    return {
+      available: true,
+      latencyMs,
+      models,
+      defaultModel: DEFAULT_MODEL,
+      defaultModelAvailable,
+    };
   } catch (error) {
     return {
       available: false,
