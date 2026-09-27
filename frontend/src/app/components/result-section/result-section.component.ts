@@ -7,11 +7,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 type ResultType = 'text' | 'list' | 'score' | 'sentiment';
 
 @Component({
-  selector: 'app-result-section',
-  standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatSnackBarModule],
-  templateUrl: './result-section.component.html',
-  styleUrls: ['./result-section.component.scss']
+    selector: 'app-result-section',
+    imports: [CommonModule, MatIconModule, MatButtonModule, MatSnackBarModule],
+    templateUrl: './result-section.component.html',
+    styleUrls: ['./result-section.component.scss']
 })
 export class ResultSectionComponent {
   title = input<string>('');

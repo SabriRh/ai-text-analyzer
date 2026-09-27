@@ -7,11 +7,10 @@ import { AnalyzeService } from '../../services/analyze.service';
 import { HealthResponse } from '../../models';
 
 @Component({
-  selector: 'app-health-button',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatSnackBarModule],
-  templateUrl: './health-button.component.html',
-  styleUrls: ['./health-button.component.scss']
+    selector: 'app-health-button',
+    imports: [CommonModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+    templateUrl: './health-button.component.html',
+    styleUrls: ['./health-button.component.scss']
 })
 export class HealthButtonComponent {
   private analyzeService = inject(AnalyzeService);

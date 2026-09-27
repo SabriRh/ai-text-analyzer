@@ -4,11 +4,10 @@ import { ResultSectionComponent } from '../result-section/result-section.compone
 import { MatIcon } from "@angular/material/icon";
 
 @Component({
-  selector: 'app-result-card',
-  standalone: true,
-  imports: [CommonModule, ResultSectionComponent, MatIcon],
-  templateUrl: './result-card.component.html',
-  styleUrls: ['./result-card.component.scss']
+    selector: 'app-result-card',
+    imports: [CommonModule, ResultSectionComponent, MatIcon],
+    templateUrl: './result-card.component.html',
+    styleUrls: ['./result-card.component.scss']
 })
 export class ResultCardComponent {
   result = input<any>(null);

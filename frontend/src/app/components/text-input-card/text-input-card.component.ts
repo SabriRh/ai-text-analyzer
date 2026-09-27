@@ -5,11 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from "@angular/material/icon";
 
 @Component({
-  selector: 'app-text-input-card',
-  standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatIcon],
-  templateUrl: './text-input-card.component.html',
-  styleUrls: ['./text-input-card.component.scss']
+    selector: 'app-text-input-card',
+    imports: [CommonModule, FormsModule, MatButtonModule, MatIcon],
+    templateUrl: './text-input-card.component.html',
+    styleUrls: ['./text-input-card.component.scss']
 })
 export class TextInputCardComponent {
   text = signal('');
