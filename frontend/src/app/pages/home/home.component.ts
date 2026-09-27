@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, signal } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { HealthButtonComponent } from '../../components/health-button/health-button.component';
@@ -12,13 +12,12 @@ import { AnalyzeService } from '../../services/analyze.service';
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule,
     HeaderComponent,
     TextInputCardComponent,
     ResultCardComponent,
     HealthButtonComponent,
     LoaderComponent
-  ],
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
