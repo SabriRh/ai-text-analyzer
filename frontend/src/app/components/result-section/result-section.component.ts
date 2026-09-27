@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -8,7 +8,7 @@ type ResultType = 'text' | 'list' | 'score' | 'sentiment';
 
 @Component({
     selector: 'app-result-section',
-    imports: [CommonModule, MatIconModule, MatButtonModule, MatSnackBarModule],
+    imports: [MatIconModule, MatButtonModule, MatSnackBarModule],
     templateUrl: './result-section.component.html',
     styleUrls: ['./result-section.component.scss']
 })
