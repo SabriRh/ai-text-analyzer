@@ -1,16 +1,26 @@
-import { Request, Response } from 'express'
-import { checkOllamaHealth } from '../shared/tools'
+import type { Request, Response } from 'express';
+import { checkOllamaHealth } from '../services/ollama.service.js';
+import { logger } from '../utils/logger.js';
+import type { HealthResponse } from '../models/health.model.js';
 
-export async function getHealth(req: Request, res: Response) {
-    const ollamaHealth = await checkOllamaHealth()
+export async function getHealth(_req: Request, res: Response<HealthResponse>) {
+    const ollamaHealth = await checkOllamaHealth();
 
-    const globalStatus = ollamaHealth.available ? 'ok' : 'ko'
+    const status: HealthResponse['status'] = ollamaHealth.available ? 'ok' : 'ko';
 
-    res.status(200).json({
-        status: globalStatus,
+    const response: HealthResponse = {
+        status,
         timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
         services: {
-            ollama: ollamaHealth
-        }
-    })
+            ollama: ollamaHealth,
+        },
+    };
+
+    logger.debug(
+        { status, ollamaAvailable: ollamaHealth.available },
+        'Health check performed'
+    );
+
+    res.status(200).json(response);
 }
