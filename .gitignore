@@ -1,25 +1,32 @@
 # Dependencies
-**/node_modules/
-**/package-lock.json
+node_modules/
+frontend/node_modules/
+backend/node_modules/
 
 # Build outputs
-**/dist/
-**/coverage/
-**/.angular/
+dist/
+build/
 
-# Environment
-**/.env
-**/.env.local
-**/.env.*.local
+# Env
+.env
+.env.local
+.env.*.local
 
-# IDE
-.idea/
-.vscode/
-*.swp
+# Logs
+*.log
+npm-debug.log*
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs
-**/*.log
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Test coverage
+coverage/
+
+# Angular
+.angular/

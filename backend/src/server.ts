@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors'
 import analyzeRoute from './routes/analyze.route';
 import healthRoute from './routes/health.route';
+import { logger } from './shared/logger';
 
 dotenv.config()
 const port = process.env.PORT;

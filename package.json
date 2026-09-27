@@ -1,0 +1,27 @@
+{
+  "name": "ai-text-analyzer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Text Analyzer - analyze, correct, reformulate and summarize text with local AI (Ollama)",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run start -w frontend",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "build:backend": "npm run build -w backend",
+    "build:frontend": "npm run build -w frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "overrides": {
+    "rxjs": "7.8.1"
+  }
+}
