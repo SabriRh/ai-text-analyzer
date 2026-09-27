@@ -5,21 +5,35 @@ import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
   imports: [CommonModule, MatIconModule, MatButtonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  isDark = signal(localStorage.getItem('theme') === 'dark');
+  isDark = signal(false);
 
-  private themeEffect = effect(() => {
-    const dark = this.isDark();
-    const html = document.documentElement;
-    html.classList.toggle('dark', dark);
-    html.classList.toggle('light', !dark);
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-  });
+  constructor() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      this.isDark.set(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.add('light');
+    }
+
+    effect(() => {
+      const dark = this.isDark();
+      if (dark) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  }
 
   toggleDarkMode() {
     this.isDark.update(value => !value);
