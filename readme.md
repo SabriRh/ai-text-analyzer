@@ -31,28 +31,30 @@ Ollama: http://localhost:11434
 
 ## Manual setup
 
-# 1. Start Ollama and pull the model
+### 1. Start Ollama and pull the model
 ollama serve
 ollama pull llama3.2:1b
 
-# 2. Install dependencies (npm workspaces — one install at root)
+### 2. Install dependencies (npm workspaces — one install at root)
 npm install
 
-# 3. Configure environment
+### 3. Configure environment
 cp backend/.env.example backend/.env
 
-# 4. Run backend + frontend
+### 4. Run backend + frontend
 npm run dev
 
-Frontend runs on http://localhost:4200, backend on http://localhost:3000.
+Frontend runs on http://localhost:4200
+backend runs on http://localhost:3000.
 
 ## Scripts
 
+```bash
 npm run dev	Run backend + frontend
 npm run dev:backend	Backend only
 npm run dev:frontend	Frontend only
 npm run build	Build both
-
+```
 ## License
 
 ISC
