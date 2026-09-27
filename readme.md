@@ -1,25 +1,58 @@
 # AI Text Analyzer
 
-Analyse, corrige, reformule et résume du texte avec une IA locale (Ollama).
+A small POC to analyze text with a local LLM: corrections, reformulation,
+summary, key points, and sentiment. Built with Ollama, Express, and Angular.
 
 ## Stack
 
-- Backend : Node.js + Express + TypeScript
-- Frontend : Angular 18
-- IA : Ollama (llama3.2:1b)
+- **Backend**: Node.js 20+, Express 5, TypeScript (ESM)
+- **Frontend**: Angular 21, Angular Material
+- **AI**: Ollama (default model: `llama3.2:1b`)
+- **Validation**: Zod
+- **Container**: Docker Compose
 
-## Installation
+## Prerequisites
+
+- Node.js ≥ 20.19
+- npm ≥ 10
+- [Ollama](https://ollama.com) running locally (or via Docker Compose)
+
+## Quick start (Docker)
 
 ```bash
-git clone https://github.com/SabriRh/text-analyzer
-cd text-analyzer
+git clone https://github.com/SabriRh/ai-text-analyzer.git
+cd ai-text-analyzer
+docker compose up -d
+```
 
-# Backend
-cd backend
+Frontend: http://localhost
+Backend: http://localhost:3000
+Ollama: http://localhost:11434
+
+## Manual setup
+
+# 1. Start Ollama and pull the model
+ollama serve
+ollama pull llama3.2:1b
+
+# 2. Install dependencies (npm workspaces — one install at root)
 npm install
+
+# 3. Configure environment
+cp backend/.env.example backend/.env
+
+# 4. Run backend + frontend
 npm run dev
 
-# Frontend
-cd frontend
-npm install
-ng serve
+Frontend runs on http://localhost:4200, backend on http://localhost:3000.
+
+## Scripts
+
+npm run dev	Run backend + frontend
+npm run dev:backend	Backend only
+npm run dev:frontend	Frontend only
+npm run build	Build both
+
+## License
+
+ISC
