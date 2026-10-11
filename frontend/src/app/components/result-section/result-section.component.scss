@@ -1,88 +1,156 @@
-.result-section {
-  background: var(--bg-card);
-  border-radius: 16px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border: 1px solid var(--border);
+:host {
+  display: block;
+  padding: 1rem 0;
+}
+
+:host(:first-child) {
+  padding-top: 0;
+}
+
+.result-section:hover .copy-btn,
+.result-section:focus-within .copy-btn {
+  opacity: 1;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.5rem;
+  min-height: 2rem;
+  margin-bottom: 0.35rem;
+}
+
+.title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.section-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--primary);
+  opacity: 0.8;
 }
 
 h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.copy-btn {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  color: var(--text-secondary);
+}
+
+button.copy-btn.mat-mdc-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    line-height: 18px;
+    margin: 0;
+  }
+}
+
+@media (hover: none) {
+  .copy-btn {
+    opacity: 1;
+  }
 }
 
 .text-content {
-  color: var(--text-secondary);
-  line-height: 1.5;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  line-height: 1.6;
   white-space: pre-wrap;
 }
 
 ul {
   margin: 0;
-  padding-left: 1.25rem;
-  color: var(--text-secondary);
+  padding-left: 1.1rem;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
+
+  &::marker {
+    color: var(--primary);
+  }
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .score-bar {
   background: var(--border);
   border-radius: 8px;
-  height: 8px;
+  height: 6px;
   overflow: hidden;
   flex: 1;
-  margin-right: 0.75rem;
 }
 
 .score-fill {
   background: var(--primary);
   height: 100%;
   border-radius: 8px;
+  transition: width 0.4s ease;
 }
 
-.score {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.score-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.tile .text-content {
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .sentiment span {
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .sentiment .positif {
-  background: #22c55e20;
-  color: #22c55e;
+  background: color-mix(in srgb, #22c55e 14%, transparent);
+  color: #16a34a;
 }
 
 .sentiment .negatif {
-  background: #ef444420;
-  color: #ef4444;
+  background: color-mix(in srgb, #ef4444 14%, transparent);
+  color: #dc2626;
 }
 
 .sentiment .neutre {
-  background: #6b728020;
-  color: #6b7280;
+  background: color-mix(in srgb, #6b7280 16%, transparent);
+  color: var(--text-secondary);
 }
 
 .empty {
   color: var(--text-secondary);
-  font-style: italic;
+  font-size: 0.88rem;
 }

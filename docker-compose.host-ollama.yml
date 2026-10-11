@@ -1,0 +1,14 @@
+# Utilise l'Ollama installé sur la machine hôte (GPU/Metal) au lieu du conteneur.
+# docker compose -f docker-compose.yml -f docker-compose.host-ollama.yml up -d --build
+services:
+  ollama:
+    profiles: ["disabled"]
+  ollama-init:
+    profiles: ["disabled"]
+  backend:
+    environment:
+      - OLLAMA_URL=http://host.docker.internal:11434/v1
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on: !reset []

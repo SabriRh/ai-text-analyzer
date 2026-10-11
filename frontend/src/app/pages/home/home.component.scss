@@ -1,4 +1,13 @@
+
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
 main {
+  flex: 1;
+  width: 100%;
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
@@ -15,6 +24,7 @@ main {
 
 .two-columns > * {
   flex: 1;
+  min-width: 0;
 }
 
 .error-message {

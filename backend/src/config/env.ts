@@ -11,6 +11,10 @@ const EnvSchema = z.object({
   OLLAMA_API_KEY: z.string().min(1),
   OLLAMA_KEEP_ALIVE: z.string().default('3h'),
   DEFAULT_MODEL: z.string().min(1),
+  CORS_ORIGINS: z
+    .string()
+    .default('http://localhost,http://localhost:80,http://localhost:4200')
+    .transform((v) => v.split(',').map((o) => o.trim()).filter(Boolean)),
 });
 
 const parsed = EnvSchema.safeParse(process.env);

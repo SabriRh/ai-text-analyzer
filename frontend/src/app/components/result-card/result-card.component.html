@@ -1,31 +1,29 @@
 <div class="card">
-    <h2><mat-icon>bar_chart</mat-icon> Résultats</h2>
+    <h2><mat-icon>analytics</mat-icon> Résultats</h2>
     <p>Analyse détaillée de votre texte</p>
 
     @if (result()) {
-    <app-result-section title="🌍 Langue détectée" [content]="result().detectedLanguage" type="text" />
+    <div class="meta-grid">
+        <div class="tile"><app-result-section title="Langue" [content]="result().language" type="text" icon="language" /></div>
+        <div class="tile"><app-result-section title="Sentiment" [content]="result().sentiment" type="sentiment" icon="sentiment_satisfied" /></div>
+        <div class="tile"><app-result-section title="Score" [content]="result().score" type="score" icon="trending_up" /></div>
+    </div>
 
-    <app-result-section title="✍️ Corrections" [content]="result().corrections" type="list" />
+    <app-result-section title="Résumé" [copyable]="true" [content]="result().summary" type="text" icon="description" />
 
-    <app-result-section title="🔄 Reformulation" [content]="result().reformulated" type="text" />
+    <app-result-section title="Points clés" [content]="result().key_points" type="list" icon="checklist" />
 
-    <app-result-section title="⚡ Version optimisée" [content]="result().optimized" type="text" />
+    <app-result-section title="Reformulation" [copyable]="true" [content]="result().reformulated" type="text" icon="cached" />
 
-    <app-result-section title="📄 Résumé" [content]="result().summary" type="text" />
+    <app-result-section title="Version optimisée" [copyable]="true" [content]="result().optimized" type="text" icon="bolt" />
 
-    <app-result-section title="🎯 Points clés" [content]="result().key_points" type="list" />
-
-    <app-result-section title="😊 Sentiment" [content]="result().sentiment" type="sentiment" />
-
-    <app-result-section title="📊 Score qualité" [content]="result().score" type="score" />
+    <app-result-section title="Corrections" [content]="result().corrections" type="list" icon="edit" />
     } @else {
     <div class="empty-state">
-        <div class="empty-state">
-            <mat-icon class="empty-icon">auto_awesome</mat-icon>
-            <h3>Prêt à analyser</h3>
-            <p>Saisissez votre texte dans le panneau de gauche</p>
-            <p class="hint">L'analyse apparaîtra ici automatiquement</p>
-        </div>
+        <mat-icon class="empty-icon">auto_awesome</mat-icon>
+        <h3>Prêt à analyser</h3>
+        <p>Saisissez votre texte dans le panneau de gauche</p>
+        <p class="hint">L'analyse apparaîtra ici automatiquement</p>
     </div>
     }
 </div>

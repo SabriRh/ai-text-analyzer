@@ -17,7 +17,7 @@ import { AnalyzeService } from '../../services/analyze.service';
     ResultCardComponent,
     HealthButtonComponent,
     LoaderComponent
-],
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

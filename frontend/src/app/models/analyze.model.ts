@@ -1,11 +1,9 @@
-// Requête envoyée au backend
 export interface AnalyzeRequest {
     text: string;
 }
 
-export interface AnalyzeResult {
-    original: string;
-    detectedLanguage: string;
+export interface AnalyzeResponse {
+    language: string;
     corrections: string[];
     reformulated: string;
     optimized: string;
@@ -13,11 +11,4 @@ export interface AnalyzeResult {
     key_points: string[];
     sentiment: 'positif' | 'negatif' | 'neutre';
     score: number;
-    language: string;
-}
-
-export interface AnalyzeResponse {
-    success: boolean;
-    data?: AnalyzeResult;
-    error?: string;
 }
