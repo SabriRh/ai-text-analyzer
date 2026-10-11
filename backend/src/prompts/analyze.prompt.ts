@@ -5,11 +5,10 @@ RÈGLES DE SORTIE :
 - Réponds EXCLUSIVEMENT avec un objet JSON valide.
 - Commence ta réponse par { et termine-la par }.
 - N'utilise ni markdown, ni balises de code, ni texte explicatif.
-- Toutes les valeurs textuelles doivent être dans la MÊME LANGUE que le texte analysé.
+- Toutes les valeurs textuelles doivent être dans la MÊME LANGUE que le texte analysé (indiquée dans le message utilisateur).
 
 SCHÉMA JSON ATTENDU :
 {
-  "language": "French",
   "corrections": ["erreur corrigée", ...],
   "reformulated": "texte reformulé conservant le sens",
   "optimized": "version courte et percutante",
@@ -20,7 +19,6 @@ SCHÉMA JSON ATTENDU :
 }
 
 DÉTAILS DES CHAMPS :
-- "language" : langue détectée du texte analysé (corrige si détection incorrecte)
 - "corrections" : liste des erreurs orthographiques/grammaticales trouvées. Vide si aucune.
 - "reformulated" : version reformulée du texte, le sens doit être préservé.
 - "optimized" : version plus courte et percutante du texte, sens préservé.
@@ -37,7 +35,11 @@ SÉCURITÉ :
 };
 
 export const buildUserPrompt = (text: string, language: string): string => {
-  return `Langue détectée : ${language}
+  const languageLine =
+    language === 'unknown'
+      ? 'Langue du texte : non déterminée, réponds dans la langue du texte.'
+      : `Langue du texte : ${language}. Réponds en ${language}.`;
+  return `${languageLine}
 
 <user_text>
 ${text}

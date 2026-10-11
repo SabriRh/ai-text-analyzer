@@ -1,6 +1,7 @@
 import { UpstreamError } from '../errors/AppError.js';
 import {
-    AnalyzeResultSchema,
+    LlmAnalyzeJsonSchema,
+    LlmAnalyzeResultSchema,
     type AnalyzeResult,
 } from '../models/analyze.schema.js';
 import { buildASystemPrompt, buildUserPrompt } from '../prompts/analyze.prompt.js';
@@ -12,8 +13,11 @@ import { languageMap } from '../models/analyze.model.js';
 export async function analyzeText(text: string): Promise<AnalyzeResult> {
     const detection = detectLanguage(text);
     const isoLanguage = detection.language ?? 'unknown';
-    const language = languageMap[isoLanguage] ?? 'unknown';
     const reliability = detection.reliability;
+    const language =
+        reliability === 'confident' || reliability === 'likely'
+            ? (languageMap[isoLanguage] ?? 'unknown')
+            : 'unknown';
 
     logger.debug(
         { isoLanguage, language, reliability, isTooCloseToCall: detection.isTooCloseToCall },
@@ -35,7 +39,10 @@ export async function analyzeText(text: string): Promise<AnalyzeResult> {
             },
         ],
         temperature: 0.2,
-        response_format: { type: 'json_object' },
+        response_format: {
+            type: 'json_schema',
+            json_schema: { name: 'analyze_result', strict: true, schema: LlmAnalyzeJsonSchema },
+        },
     });
 
     const aiContent = completion.choices[0]?.message?.content ?? '';
@@ -50,7 +57,7 @@ export async function analyzeText(text: string): Promise<AnalyzeResult> {
         throw new UpstreamError('LLM returned invalid JSON', { raw: aiContent });
     }
 
-    const result = AnalyzeResultSchema.safeParse(parsed);
+    const result = LlmAnalyzeResultSchema.safeParse(parsed);
     logger.debug({ result }, 'Validated JSON against schema');
     if (!result.success) {
         throw new UpstreamError('LLM returned unexpected structure', {
@@ -58,5 +65,5 @@ export async function analyzeText(text: string): Promise<AnalyzeResult> {
         });
     }
 
-    return result.data;
+    return { language, ...result.data };
 }
