@@ -7,12 +7,12 @@ Réponds EXCLUSIVEMENT avec du JSON valide, sans markdown ni texte supplémentai
 Schéma JSON attendu :
 {
   "language": "French",
-  "corrections": ["erreur 1", ...],
+  "corrections": ["erreur 1"],
   "reformulated": "texte reformulé",
   "optimized": "version courte percutante",
   "summary": "résumé concis",
   "key_points": ["point 1", "point 2"],
-  "sentiment": "positif|negatif|neutre",
+  "sentiment": "positif",
   "score": 0.5
 }
 
