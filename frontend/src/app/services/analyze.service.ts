@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AnalyzeService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = '/api';
 
   analyzeText(text: string): Observable<AnalyzeResponse> {
     return this.http.post<AnalyzeResponse>(`${this.apiUrl}/analyze`, { text });

@@ -6,8 +6,8 @@
             }
             <h3>{{ title() }}</h3>
         </div>
-        @if (content() && type() !== 'score') {
-        <button mat-icon-button (click)="copyText(content()?.toString() ?? '')">
+        @if (copyable() && content()) {
+        <button mat-icon-button class="copy-btn" aria-label="Copier" (click)="copyText(content()?.toString() ?? '')">
             <mat-icon>content_copy</mat-icon>
         </button>
         }
@@ -31,9 +31,9 @@
         @if (content() !== undefined) {
         <div class="score">
             <div class="score-bar">
-                <div class="score-fill" [style.width.%]="content() * 100"></div>
+                <div class="score-fill" [style.width.%]="percent()"></div>
             </div>
-            <span>{{ content() * 100 }}%</span>
+            <span class="score-value">{{ percent() }}%</span>
         </div>
         } @else {
         <div class="empty">Aucun score</div>
@@ -43,7 +43,7 @@
         @case ('sentiment') {
         @if (content()) {
         <div class="sentiment">
-            <span [class]="content()">{{ content() }}</span>
+            <span [class]="content()">{{ sentimentLabels[content()] }}</span>
         </div>
         } @else {
         <div class="empty">Non déterminé</div>

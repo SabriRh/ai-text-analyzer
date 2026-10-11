@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import analyzeRoute from './routes/analyze.route.js';
 import healthRoute from './routes/health.route.js';
+import { env } from './config/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
 export const app = express();
@@ -12,7 +13,7 @@ app.use(express.json({ limit: '100kb' }));
 // CORS
 app.use(
     cors({
-        origin: ['http://localhost', 'http://localhost:80', 'http://localhost:4200'],
+        origin: env.CORS_ORIGINS,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,

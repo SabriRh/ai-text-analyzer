@@ -1,7 +1,7 @@
 header {
   background: var(--bg-card);
   border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem;
+  padding: 0.75rem 2rem;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -16,15 +16,37 @@ header {
 }
 
 h1 {
-  font-size: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin: 0;
   color: var(--text-primary);
 }
 
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+
+  mat-icon {
+    font-size: 1.15rem;
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--primary);
+  }
+}
+
 p {
-  margin: 0.25rem 0 0;
+  margin: 0.15rem 0 0 2.6rem;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 button {

@@ -3,7 +3,8 @@
     <p>Collez votre texte ci-dessous</p>
 
     <textarea [ngModel]="text()" (ngModelChange)="text.set($event)" placeholder="Saisissez ou collez votre texte ici..."
-        rows="10"></textarea>
+        rows="12" maxlength="5000"></textarea>
+    <div class="counter">{{ text().length }} / 5000</div>
 
     <div class="buttons">
         <button mat-flat-button color="primary" [disabled]="!text()" (click)="onAnalyze()">

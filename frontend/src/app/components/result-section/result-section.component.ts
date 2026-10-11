@@ -17,6 +17,13 @@ export class ResultSectionComponent {
   content = input<any>();
   type = input<ResultType>('text');
   icon = input<string | null>(null);
+  copyable = input(false);
+
+  readonly sentimentLabels: Record<string, string> = { positif: 'Positif', negatif: 'Négatif', neutre: 'Neutre' };
+
+  percent(): number {
+    return Math.round((this.content() ?? 0) * 100);
+  }
 
   constructor(private snackBar: MatSnackBar) { }
 

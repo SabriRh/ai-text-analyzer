@@ -3,21 +3,21 @@
     <p>Analyse détaillée de votre texte</p>
 
     @if (result()) {
-    <app-result-section title="Langue détectée" [content]="result().language" type="text" icon="language" />
+    <div class="meta-grid">
+        <div class="tile"><app-result-section title="Langue" [content]="result().language" type="text" icon="language" /></div>
+        <div class="tile"><app-result-section title="Sentiment" [content]="result().sentiment" type="sentiment" icon="sentiment_satisfied" /></div>
+        <div class="tile"><app-result-section title="Score" [content]="result().score" type="score" icon="trending_up" /></div>
+    </div>
 
-    <app-result-section title="Corrections" [content]="result().corrections" type="list" icon="edit" />
-
-    <app-result-section title="Reformulation" [content]="result().reformulated" type="text" icon="cached" />
-
-    <app-result-section title="Version optimisée" [content]="result().optimized" type="text" icon="lightning_bolt" />
-
-    <app-result-section title="Résumé" [content]="result().summary" type="text" icon="description" />
+    <app-result-section title="Résumé" [copyable]="true" [content]="result().summary" type="text" icon="description" />
 
     <app-result-section title="Points clés" [content]="result().key_points" type="list" icon="checklist" />
 
-    <app-result-section title="Sentiment" [content]="result().sentiment" type="sentiment" icon="sentiment_satisfied" />
+    <app-result-section title="Reformulation" [copyable]="true" [content]="result().reformulated" type="text" icon="cached" />
 
-    <app-result-section title="Score de qualité" [content]="result().score" type="score" icon="trending_up" />
+    <app-result-section title="Version optimisée" [copyable]="true" [content]="result().optimized" type="text" icon="bolt" />
+
+    <app-result-section title="Corrections" [content]="result().corrections" type="list" icon="edit" />
     } @else {
     <div class="empty-state">
         <mat-icon class="empty-icon">auto_awesome</mat-icon>

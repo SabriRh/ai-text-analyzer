@@ -1,34 +1,28 @@
-# backend/Dockerfile
-FROM node:20-alpine AS builder
-
+# Contexte de build : racine du repo (lockfile npm workspaces à la racine)
+FROM node:22-alpine AS builder
 WORKDIR /app
+COPY package.json package-lock.json ./
+COPY backend/package.json backend/
+COPY frontend/package.json frontend/
+RUN npm ci -w backend
+COPY backend backend
+RUN npm run build -w backend
 
-# Copier les fichiers de dépendances
-COPY package*.json ./
-RUN npm ci --only=production
-
-# Copier le reste du code source
-COPY . .
-
-# Compiler TypeScript vers JavaScript
-RUN npm run build
-
-# Étape de production : image plus légère
-FROM node:20-alpine
-
+FROM node:22-alpine AS deps
 WORKDIR /app
+COPY package.json package-lock.json ./
+COPY backend/package.json backend/
+COPY frontend/package.json frontend/
+RUN npm ci -w backend --omit=dev
 
-# Copier les modules et le code compilé
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
-
-# Variable d'environnement par défaut (peut être surchargée)
-ENV PORT=3000
-ENV OLLAMA_URL=http://ollama:11434/v1
-
-# Exposer le port
+FROM node:22-alpine
+ENV NODE_ENV=production PORT=3000
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder /app/backend/dist ./backend/dist
+COPY backend/package.json ./backend/
+USER node
 EXPOSE 3000
-
-# Lancer le serveur
-CMD ["node", "dist/server.js"]
+HEALTHCHECK --interval=15s --timeout=3s --start-period=10s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1
+CMD ["node", "backend/dist/server.js"]
