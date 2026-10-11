@@ -3,6 +3,10 @@
 A small POC to analyze text with a local LLM: corrections, reformulation,
 summary, key points, and sentiment. Built with Ollama, Express, and Angular.
 
+
+<img width="1802" height="964" alt="Capture d’écran 2026-10-11 à 17 36 25" src="https://github.com/user-attachments/assets/b3188edd-3866-4a00-aba1-704a47b1cb86" />
+
+
 ## Stack
 
 - **Backend**: Node.js 20+, Express 5, TypeScript (ESM)
