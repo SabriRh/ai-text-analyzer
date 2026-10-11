@@ -1,4 +1,4 @@
-export type Language = 'French' | 'English' | 'Spanish' | 'German' | 'Italian' | 'Portuguese' | 'Dutch' | 'Russian' | 'Chinese' | 'Japanese' | 'Arabic' | 'unknown language to detect';
+export type Language = 'French' | 'English' | 'Spanish' | 'German' | 'Italian' | 'Portuguese' | 'Dutch' | 'Russian' | 'Chinese' | 'Japanese' | 'Arabic' | 'unknown';
 
 export const languageMap: Record<string, Language> = {
     'fra': 'French',

@@ -19,6 +19,9 @@ export type AnalyzeBody = z.infer<typeof AnalyzeBodySchema>;
 export const AnalyzeSentimentSchema = z.enum(['positif', 'negatif', 'neutre']);
 
 export const AnalyzeResultSchema = z.object({
+    language: z.enum(['French', 'English', 'Spanish', 'German', 'Italian',
+        'Portuguese', 'Dutch', 'Russian', 'Chinese', 'Japanese',
+        'Arabic', 'unknown',]),
     corrections: z.array(z.string()),
     reformulated: z.string(),
     optimized: z.string(),

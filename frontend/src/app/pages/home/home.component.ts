@@ -17,7 +17,7 @@ import { AnalyzeService } from '../../services/analyze.service';
     ResultCardComponent,
     HealthButtonComponent,
     LoaderComponent
-],
+  ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
@@ -37,6 +37,7 @@ export class HomeComponent {
 
     this.analyzeService.analyzeText(text).subscribe({
       next: (res: AnalyzeResponse) => {
+        console.log({ res }, 'Received analyze response');
         this.result.set(res);
         this.isLoading.set(false);
       },

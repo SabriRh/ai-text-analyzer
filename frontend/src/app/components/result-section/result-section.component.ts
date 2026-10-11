@@ -16,6 +16,7 @@ export class ResultSectionComponent {
   title = input<string>('');
   content = input<any>();
   type = input<ResultType>('text');
+  icon = input<string | null>(null);
 
   constructor(private snackBar: MatSnackBar) { }
 
